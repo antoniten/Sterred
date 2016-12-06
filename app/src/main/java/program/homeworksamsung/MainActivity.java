@@ -1,45 +1,37 @@
 package program.homeworksamsung;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    EditText FirstName;
+    EditText LastName;
+
+    Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("Create!", "Create!");
+
+        FirstName = (EditText) findViewById(R.id.etFName);
+        LastName = (EditText) findViewById(R.id.etLName);
+
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(this);
     }
+
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e("Start!", "Start!");
-    }
-    @Override
-    protected void onRestart() {
-        super.onStart();
-        Log.e("Start!", "Start!");
-    }
-    @Override
-    protected void onResume() {
-        super.onStart();
-        Log.e("Resume", "Resume");
-    }
-    @Override
-    protected void onPause() {
-        super.onStart();
-        Log.e("Pause||", "Pause||");
-    }
-    @Override
-    protected void onStop() {
-        super.onStart();
-        Log.e("Stop", "Stop");
-    }
-    @Override
-    protected void onDestroy() {
-        super.onStart();
-        Log.e("Really ?", "Destroy(((");
+    public void onClick(View v) {
+        Intent intent = new Intent(this, ViewActivity.class);
+        intent.putExtra("fname", FirstName.getText().toString());
+        intent.putExtra("lname", LastName.getText().toString());
+        startActivity(intent);
     }
 }
