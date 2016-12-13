@@ -1,37 +1,50 @@
 package program.homeworksamsung;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Chronometer;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-    EditText FirstName;
-    EditText LastName;
-
-    Button btnSubmit;
-
+public class MainActivity extends Activity {
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirstName = (EditText) findViewById(R.id.etFName);
-        LastName = (EditText) findViewById(R.id.etLName);
+        final Chronometer myChronometer = (Chronometer)findViewById(R.id.chronometer);
+        Button buttonStart = (Button)findViewById(R.id.buttonstart);
+        Button buttonStop = (Button)findViewById(R.id.buttonstop);
+        Button buttonReset = (Button)findViewById(R.id.buttonreset);
 
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(this);
-    }
+        buttonStart.setOnClickListener(new Button.OnClickListener(){
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, ViewActivity.class);
-        intent.putExtra("fname", FirstName.getText().toString());
-        intent.putExtra("lname", LastName.getText().toString());
-        startActivity(intent);
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                myChronometer.start();
+            }});
+
+        buttonStop.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                myChronometer.stop();
+
+            }});
+
+        buttonReset.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                myChronometer.setBase(SystemClock.elapsedRealtime());
+
+            }});
+
+
     }
 }
